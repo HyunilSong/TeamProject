@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "31348524714",
+    "firebase_url": "https://drawingshare-8fc09.firebaseio.com",
+    "project_id": "drawingshare-8fc09",
+    "storage_bucket": "drawingshare-8fc09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31348524714:android:39e3d17a43285d480e72d3",
+        "android_client_info": {
+          "package_name": "com.team.drawing_share"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31348524714-gf03vpp8nknipmvcfvgrgqpfc50cl7q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL5nIMs1h58XXiWZi1ZLWBNYoX4iSOlZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31348524714-gf03vpp8nknipmvcfvgrgqpfc50cl7q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
