@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +43,10 @@ public class SigninActivity extends AppCompatActivity {
         actionBar.setTitle("Sign In");  //액션바 제목설정
 
         actionBar.setDisplayHomeAsUpEnabled(true);
+        EditText editTextPassword = (EditText) findViewById(R.id.login_password);
+        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
     }
     private boolean isValidEmail() {
         if (email.isEmpty()) {
