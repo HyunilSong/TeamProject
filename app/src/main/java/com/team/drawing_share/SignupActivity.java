@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -79,6 +80,8 @@ public class SignupActivity extends AppCompatActivity {
                             // 회원가입 성공
                             Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                             finish();
+                            Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
+                            startActivity(intent);
                         } else {
                             // 회원가입 실패
                             Toast.makeText(SignupActivity.this, R.string.fail_signup, Toast.LENGTH_SHORT).show();
