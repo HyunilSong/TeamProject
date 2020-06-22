@@ -4,4 +4,6 @@
     <string name="title_read">Read</string>
     <string name="title_write">Write</string>
     <string name="title_search">Search</string>
+    <string name="success_signup">Successfully Created</string>
+    <string name="fail_signup">Create fail</string>
 </resources>
