@@ -7,12 +7,10 @@
     tools:context=".SignupActivity">
 
 
-
     <TextView
         android:id="@+id/sign_up"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="Sign Up"
         android:textSize="20dp"
@@ -26,7 +24,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="250dp"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +35,7 @@
             android:id="@+id/new_ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="  ID" />
+            android:text="  Email" />
 
         <EditText
             android:id="@+id/id_text"
@@ -54,7 +52,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/create_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView

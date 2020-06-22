@@ -1,6 +1,7 @@
 package com.team.drawing_share;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -31,11 +32,16 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        firebaseAuth = FirebaseAuth.getInstance();
 
+        firebaseAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.id_text);
         editTextPassword = findViewById(R.id.password_text);
         editTextPasswordCheck = findViewById(R.id.check_text);
+
+        ActionBar actionBar = getSupportActionBar();  //제목줄 객체 얻어오기
+        actionBar.setTitle("Sign Up");  //액션바 제목설정
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private boolean isValidEmail() {
@@ -72,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
                             Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
+                            finish();
                         } else {
                             // 회원가입 실패
                             Toast.makeText(SignupActivity.this, R.string.fail_signup, Toast.LENGTH_SHORT).show();
