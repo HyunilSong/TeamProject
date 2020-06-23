@@ -2,16 +2,15 @@ package com.team.drawing_share;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -30,6 +29,8 @@ public class SigninActivity extends AppCompatActivity {
     private String email = "";
     private String password = "";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,48 @@ public class SigninActivity extends AppCompatActivity {
 
 
     }
+
+    public void OnClickHandler(View view)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Password Wizard").setMessage("What is your account?\nWe will send email to change password.");
+        final EditText et = new EditText(SigninActivity.this);
+        builder.setView(et);
+
+        builder.setPositiveButton("submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String value = et.getText().toString();
+                //비밀번호 재설정 이메일 보내기
+                firebaseAuth.sendPasswordResetEmail(value)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(SigninActivity.this, "Check your Email", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(SigninActivity.this, "Nonexistent Email", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+            }
+        });
+
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();     //닫기
+                // Event
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private boolean isValidEmail() {
         if (email.isEmpty()) {
             // 이메일 공백

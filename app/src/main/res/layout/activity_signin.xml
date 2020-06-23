@@ -72,16 +72,17 @@
         android:layout_height="wrap_content"
         android:onClick="signIn"
         android:text="Sign In"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/f_password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/f_password_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
+        android:onClick="OnClickHandler"
         android:text="Forget password?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
