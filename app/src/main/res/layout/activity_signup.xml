@@ -27,20 +27,43 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624" />
+        app:layout_constraintVertical_bias="0.644" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/new_ID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="  Email" />
+
+        <EditText
+            android:id="@+id/id_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="250dp"
         android:layout_height="140dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="52dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/create_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -67,39 +90,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/new_ID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="  Email" />
-
-        <EditText
-            android:id="@+id/id_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/create_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:onClick="signUp"
         android:text="Create"
         app:layout_constraintBottom_toTopOf="@+id/error_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

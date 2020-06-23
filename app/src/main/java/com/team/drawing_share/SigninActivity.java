@@ -11,6 +11,7 @@ import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,7 +27,6 @@ public class SigninActivity extends AppCompatActivity {
     // 이메일과 비밀번호
     private EditText editTextEmail;
     private EditText editTextPassword;
-
     private String email = "";
     private String password = "";
 
@@ -38,7 +38,6 @@ public class SigninActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.login_email);
         editTextPassword = findViewById(R.id.login_password);
-
         ActionBar actionBar = getSupportActionBar();  //제목줄 객체 얻어오기
         actionBar.setTitle("Sign In");  //액션바 제목설정
 
@@ -61,8 +60,7 @@ public class SigninActivity extends AppCompatActivity {
 
     // 비밀번호 유효성 검사
     private boolean isValidPasswd() {
-        if (password.isEmpty()) {
-            System.out.println(password);
+        if (password.isEmpty()||password.length()<6) {
             // 비밀번호 공백
             return false;
         }

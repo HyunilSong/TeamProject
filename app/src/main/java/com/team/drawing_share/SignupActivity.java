@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextPasswordCheck;
-
+    private TextView textviewError;
     private String email = "";
     private String password = "";
     private String passwordcheck = "";
@@ -38,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.id_text);
         editTextPassword = findViewById(R.id.password_text);
         editTextPasswordCheck = findViewById(R.id.check_text);
-
+        textviewError = findViewById(R.id.error_text);
         ActionBar actionBar = getSupportActionBar();  //제목줄 객체 얻어오기
         actionBar.setTitle("Sign Up");  //액션바 제목설정
 
@@ -47,6 +48,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private boolean isValidEmail() {
         if (email.isEmpty()) {
+            textviewError.setText("- Email format required");
             // 이메일 공백
             System.out.println(email);
             return false;
@@ -58,12 +60,13 @@ public class SignupActivity extends AppCompatActivity {
 
     // 비밀번호 유효성 검사
     private boolean isValidPasswd() {
-        if (password.isEmpty()) {
-            System.out.println(password);
+        if (password.isEmpty()||password.length()<6) {
+            textviewError.setText("- Set password with at least 6 characters");
             // 비밀번호 공백
             return false;
         }
         else if(!password.equals(passwordcheck)){
+            textviewError.setText("- Password and Password Check mismatch");
             return false;
         }
         else{
@@ -85,6 +88,7 @@ public class SignupActivity extends AppCompatActivity {
                         } else {
                             // 회원가입 실패
                             Toast.makeText(SignupActivity.this, R.string.fail_signup, Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
