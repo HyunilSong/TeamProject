@@ -29,8 +29,7 @@ public class SigninActivity extends AppCompatActivity {
     private String email = "";
     private String password = "";
 
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +42,8 @@ public class SigninActivity extends AppCompatActivity {
         actionBar.setTitle("Sign In");  //액션바 제목설정
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        EditText editTextPassword = (EditText) findViewById(R.id.login_password);
+        EditText editTextPassword = findViewById(R.id.login_password);
         editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
 
     }
 
