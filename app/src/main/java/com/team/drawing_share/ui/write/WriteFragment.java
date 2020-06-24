@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +16,17 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mukesh.DrawingView;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
+import com.team.drawing_share.DataActivity;
 import com.team.drawing_share.R;
 
 public class WriteFragment extends Fragment implements View.OnClickListener, SeekBar.OnSeekBarChangeListener{
@@ -29,12 +35,18 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
     private DrawingView drawingView;
     private SeekBar penSizeSeekBar, eraserSizeSeekBar;
     private WriteViewModel writeViewModel;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         writeViewModel =
                 ViewModelProviders.of(this).get(WriteViewModel.class);
         View root = inflater.inflate(R.layout.fragment_write, container, false);
+        firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference();
         initializeUI(root);
         setListeners();
         return root;
@@ -63,6 +75,12 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
         clearButton = v.findViewById(R.id.clear_button);
     }
 
+    private String nextIdea(String prev){
+        String next = "";
+
+        return next;
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -70,14 +88,21 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setTitle("Saving File");
                 alert.setMessage("Write your file name.");
-                final EditText name = new EditText(getActivity());
-                alert.setView(name);
+                final EditText title_et = new EditText(getActivity());
+                alert.setView(title_et);
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String username = name.getText().toString();
-                        drawingView.saveImage(Environment.getExternalStorageDirectory().toString(), username,
-                                Bitmap.CompressFormat.PNG, 100);
+                        DatabaseReference idearef = ref.child("idea");
+                        String title = title_et.getText().toString();
+                        String username = firebaseAuth.getCurrentUser().getDisplayName();
+                        WriteTemplate idea = new WriteTemplate(title,username);
+                        System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
+                        idearef.push().setValue(idea);
+
+
+//                        drawingView.saveImage(Environment.getExternalStorageDirectory().toString(), title,
+//                                Bitmap.CompressFormat.PNG, 100);
                     }
                 });
                 alert.setNegativeButton("Don`t save", new DialogInterface.OnClickListener() {
