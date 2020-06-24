@@ -1,5 +1,7 @@
 package com.team.drawing_share.ui.write;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
@@ -64,8 +67,25 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.save_button:
-                drawingView.saveImage(Environment.getExternalStorageDirectory().toString(), "test",
-                        Bitmap.CompressFormat.PNG, 100);
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Saving File");
+                alert.setMessage("Write your file name.");
+                final EditText name = new EditText(getActivity());
+                alert.setView(name);
+                alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String username = name.getText().toString();
+                        drawingView.saveImage(Environment.getExternalStorageDirectory().toString(), username,
+                                Bitmap.CompressFormat.PNG, 100);
+                    }
+                });
+                alert.setNegativeButton("Don`t save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                alert.show();
                 break;
             case R.id.load_button:
                 drawingView.loadImage(BitmapFactory.decodeResource(getResources(), R.raw.test));
