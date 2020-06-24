@@ -45,6 +45,14 @@ public class SigninActivity extends AppCompatActivity {
         EditText editTextPassword = findViewById(R.id.login_password);
         editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
+        //로그인 돼있으면 자동으로 넘김
+        if (firebaseAuth.getCurrentUser() != null) {
+            // User is signed in (getCurrentUser() will be null if not signed in)
+            Intent intent = new Intent(SigninActivity.this, DataActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void OnClickHandler(View view)
@@ -129,6 +137,7 @@ public class SigninActivity extends AppCompatActivity {
                             Toast.makeText(SigninActivity.this, R.string.success_signin, Toast.LENGTH_SHORT).show();
                             finish();
                             Intent intent = new Intent(SigninActivity.this, DataActivity.class);
+
                             startActivity(intent);
                         } else {
                             // 로그인 실패
@@ -137,5 +146,13 @@ public class SigninActivity extends AppCompatActivity {
                     }
                 });
     }
+//    @Override
+//    protected void onDestroy() {
+//
+//        if(firebaseAuth.getCurrentUser() != null) {
+//            firebaseAuth.signOut();
+//        }
+//        super.onDestroy();
+//    }
 
 }
