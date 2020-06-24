@@ -147,13 +147,5 @@ public class SigninActivity extends AppCompatActivity {
                     }
                 });
     }
-//    @Override
-//    protected void onDestroy() {
-//
-//        if(firebaseAuth.getCurrentUser() != null) {
-//            firebaseAuth.signOut();
-//        }
-//        super.onDestroy();
-//    }
 
 }

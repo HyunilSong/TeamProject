@@ -3,6 +3,7 @@ package com.team.drawing_share;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -11,7 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class DataActivity extends AppCompatActivity {
-
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,4 +28,11 @@ public class DataActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+//    @Override
+//    protected void onDestroy() {
+//        if(firebaseAuth.getCurrentUser() != null) {
+//            firebaseAuth.signOut();
+//        }
+//        super.onDestroy();
+//    }
 }
