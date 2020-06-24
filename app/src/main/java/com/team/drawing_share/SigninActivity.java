@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SigninActivity extends AppCompatActivity {
     // 파이어베이스 인증 객체 생성
@@ -126,7 +128,7 @@ public class SigninActivity extends AppCompatActivity {
         }
     }
 
-    private void loginUser(String email, String password)
+    private void loginUser(final String email, String password)
     {
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -134,10 +136,9 @@ public class SigninActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공
-                            Toast.makeText(SigninActivity.this, R.string.success_signin, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SigninActivity.this, firebaseAuth.getCurrentUser().getDisplayName() + " logined" , Toast.LENGTH_SHORT).show();
                             finish();
                             Intent intent = new Intent(SigninActivity.this, DataActivity.class);
-
                             startActivity(intent);
                         } else {
                             // 로그인 실패
@@ -146,13 +147,13 @@ public class SigninActivity extends AppCompatActivity {
                     }
                 });
     }
-//    @Override
-//    protected void onDestroy() {
-//
-//        if(firebaseAuth.getCurrentUser() != null) {
-//            firebaseAuth.signOut();
-//        }
-//        super.onDestroy();
-//    }
+    @Override
+    protected void onDestroy() {
+
+        if(firebaseAuth.getCurrentUser() != null) {
+            firebaseAuth.signOut();
+        }
+        super.onDestroy();
+    }
 
 }

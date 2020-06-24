@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -73,7 +75,19 @@ public class SignupActivity extends AppCompatActivity {
             return true;
         }
     }
-    private void createUser(String email, String password) {
+
+    private String createuserId(String email){
+        String result = "";
+        for(int i = 0; i < email.length(); i++){
+            if(email.charAt(i)=='@'){
+                return result;
+            }
+            result += email.charAt(i);
+        }
+        return result;
+    }
+
+    private void createUser(final String email, String password) {
         System.out.println("creation start");
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -81,6 +95,19 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(createuserId(email))
+                                    .build();
+
+                            firebaseAuth.getCurrentUser().updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                            }
+                                        }
+                                    });
+
                             Toast.makeText(SignupActivity.this, R.string.success_signup, Toast.LENGTH_SHORT).show();
                             finish();
                             Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
@@ -93,6 +120,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
     public void signUp(View view) {
         email = editTextEmail.getText().toString();
         password = editTextPassword.getText().toString();

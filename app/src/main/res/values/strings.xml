@@ -6,7 +6,7 @@
     <string name="title_search">Search</string>
     <string name="success_signup">Successfully Created</string>
     <string name="fail_signup">Create fail</string>
-    <string name="success_signin">Successfully Logined</string>
+    <string name="success_signin"> Logined</string>
     <string name="fail_signin">Login fail</string>
 
 </resources>
