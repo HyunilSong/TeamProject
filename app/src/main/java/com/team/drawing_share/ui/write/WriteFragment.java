@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
@@ -20,14 +22,22 @@ import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mukesh.DrawingView;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 import com.team.drawing_share.DataActivity;
 import com.team.drawing_share.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class WriteFragment extends Fragment implements View.OnClickListener, SeekBar.OnSeekBarChangeListener{
     private Button saveButton, penButton, eraserButton, penColorButton, backgroundColorButton,
@@ -35,9 +45,14 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
     private DrawingView drawingView;
     private SeekBar penSizeSeekBar, eraserSizeSeekBar;
     private WriteViewModel writeViewModel;
+
     private FirebaseAuth firebaseAuth;
+
     private FirebaseDatabase database;
     private DatabaseReference ref;
+
+    private FirebaseStorage storage;
+    private StorageReference storageref;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +62,9 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
+
+        storage = FirebaseStorage.getInstance();
+        storageref = storage.getReference();
         initializeUI(root);
         setListeners();
         return root;
@@ -100,8 +118,31 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                         System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
                         idearef.push().setValue(idea);
 
+                        // problem
+                        Bitmap whatTheUserDrewBitmap = drawingView.getDrawingCache();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        whatTheUserDrewBitmap =
+                                ThumbnailUtils.extractThumbnail(whatTheUserDrewBitmap, 256, 256);
+                        // problem
+                        //whatTheUserDrewBitmap 이 Bitmap의 객체가 되어야됨(그림이 그려진)
+                        whatTheUserDrewBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] data = baos.toByteArray();
 
-//                        drawingView.saveImage(Environment.getExternalStorageDirectory().toString(), title,
+                        UploadTask uploadTask = storageref.putBytes(data);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                // ...
+                            }
+                        });
+
+//                        drawingView.saveImage(storageref.toString(), idea.Time + "_" + title,
 //                                Bitmap.CompressFormat.PNG, 100);
                     }
                 });
