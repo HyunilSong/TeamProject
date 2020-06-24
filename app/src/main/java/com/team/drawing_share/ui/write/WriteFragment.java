@@ -32,13 +32,8 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
         writeViewModel =
                 ViewModelProviders.of(this).get(WriteViewModel.class);
         View root = inflater.inflate(R.layout.fragment_write, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        writeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        initializeUI(root);
+        setListeners();
         return root;
     }
     private void setListeners() {
@@ -52,17 +47,17 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
         loadButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
     }
-    private void initializeUI() {
-        drawingView = getView().findViewById(R.id.scratch_pad);
-        saveButton = getView().findViewById(R.id.save_button);
-        loadButton = getView().findViewById(R.id.load_button);
-        penButton = getView().findViewById(R.id.pen_button);
-        eraserButton = getView().findViewById(R.id.eraser_button);
-        penColorButton = getView().findViewById(R.id.pen_color_button);
-        backgroundColorButton = getView().findViewById(R.id.background_color_button);
-        penSizeSeekBar = getView().findViewById(R.id.pen_size_seekbar);
-        eraserSizeSeekBar = getView().findViewById(R.id.eraser_size_seekbar);
-        clearButton = getView().findViewById(R.id.clear_button);
+    private void initializeUI(View v) {
+        drawingView = v.findViewById(R.id.scratch_pad);
+        saveButton = v.findViewById(R.id.save_button);
+        loadButton = v.findViewById(R.id.load_button);
+        penButton = v.findViewById(R.id.pen_button);
+        eraserButton = v.findViewById(R.id.eraser_button);
+        penColorButton = v.findViewById(R.id.pen_color_button);
+        backgroundColorButton = v.findViewById(R.id.background_color_button);
+        penSizeSeekBar = v.findViewById(R.id.pen_size_seekbar);
+        eraserSizeSeekBar = v.findViewById(R.id.eraser_size_seekbar);
+        clearButton = v.findViewById(R.id.clear_button);
     }
 
     @Override
