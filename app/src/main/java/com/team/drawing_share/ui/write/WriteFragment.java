@@ -1,5 +1,6 @@
 package com.team.drawing_share.ui.write;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -37,6 +38,8 @@ import com.team.drawing_share.DataActivity;
 import com.team.drawing_share.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WriteFragment extends Fragment implements View.OnClickListener, SeekBar.OnSeekBarChangeListener{
     private Button saveButton, penButton, eraserButton, penColorButton, backgroundColorButton,
@@ -113,7 +116,8 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                         DatabaseReference idearef = ref.child("idea");
                         String title = title_et.getText().toString();
                         String username = firebaseAuth.getCurrentUser().getDisplayName();
-                        WriteTemplate idea = new WriteTemplate(title,username);
+                        storageref = storage.getReference();
+                        WriteTemplate idea = new WriteTemplate(title,username,storageref.toString());
                         System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
                         idearef.push().setValue(idea);
 
