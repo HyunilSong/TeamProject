@@ -64,7 +64,7 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
         ref = database.getReference();
 
         storage = FirebaseStorage.getInstance();
-        storageref = storage.getReference();
+
         initializeUI(root);
         setListeners();
         return root;
@@ -120,29 +120,28 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                         System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
                         drawingView.saveImage(Environment.getExternalStorageDirectory().getPath().toString(), idea.Time + "_" + title,
                                 Bitmap.CompressFormat.PNG, 100);
-//                        // problem
-//                        Bitmap whatTheUserDrewBitmap = drawingView.getDrawingCache();
-//                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                        whatTheUserDrewBitmap =
-//                                ThumbnailUtils.extractThumbnail(whatTheUserDrewBitmap, 256, 256);
-//                        // problem
-//                        //whatTheUserDrewBitmap 이 Bitmap의 객체가 되어야됨(그림이 그려진)
-//                        whatTheUserDrewBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                        byte[] data = baos.toByteArray();
-//
-//                        UploadTask uploadTask = storageref.putBytes(data);
-//                        uploadTask.addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception exception) {
-//                                // Handle unsuccessful uploads
-//                            }
-//                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-//                                // ...
-//                            }
-//                        });
+
+                        String imgpath = Environment.getExternalStorageDirectory().getPath()+"/"+idea.Time+"_"+title+".png";
+                        Bitmap bm = BitmapFactory.decodeFile(imgpath);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] data = baos.toByteArray();
+                        storageref = storage.getReference(idea.Time+"_"+title+".png");
+
+                        UploadTask uploadTask = storageref.putBytes(data);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                // ...
+                            }
+                        });
 
 
                     }

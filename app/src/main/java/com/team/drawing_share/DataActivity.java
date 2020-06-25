@@ -28,11 +28,11 @@ public class DataActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        if(firebaseAuth.getCurrentUser() != null) {
-//            firebaseAuth.signOut();
-//        }
-//        super.onDestroy();
-//    }
+    @Override
+    protected void onDestroy() {
+        if(firebaseAuth.getCurrentUser() != null) {
+            firebaseAuth.signOut();
+        }
+        super.onDestroy();
+    }
 }
