@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +25,21 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
     public ReadAdapter(ArrayList<Idea> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
+    }
+
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
+        ImageView iv_image;
+        TextView tv_title;
+        TextView tv_writer;
+        TextView tv_date;
+
+        public CustomViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.iv_image = itemView.findViewById(R.id.iv_image);
+            this.tv_title = itemView.findViewById(R.id.tv_title);
+            this.tv_writer = itemView.findViewById(R.id.tv_writer);
+            this.tv_date = itemView.findViewById(R.id.tv_date);
+        }
     }
 
     @NonNull
@@ -50,18 +66,5 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
         return (arrayList != null ? arrayList.size() : 0);
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
-        ImageView iv_image;
-        TextView tv_title;
-        TextView tv_writer;
-        TextView tv_date;
 
-        public CustomViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.iv_image = itemView.findViewById(R.id.iv_image);
-            this.tv_title = itemView.findViewById(R.id.tv_title);
-            this.tv_writer = itemView.findViewById(R.id.tv_writer);
-            this.tv_date = itemView.findViewById(R.id.tv_date);
-        }
-    }
 }

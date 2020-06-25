@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +20,7 @@ import com.team.drawing_share.R;
 
 import java.util.ArrayList;
 
-public class ReadFragment extends AppCompatActivity {
+public class ReadFragment extends Fragment{
     private View view;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -28,13 +29,13 @@ public class ReadFragment extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_read,container,false);
+        view = inflater.inflate(R.layout.fragment_read, container, false);
+
+        layoutManager = new LinearLayoutManager(getActivity());
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
 
@@ -49,7 +50,8 @@ public class ReadFragment extends AppCompatActivity {
                     Idea idea = snapshot.getValue(Idea.class);
                     arrayList.add(idea);
                 }
-                adapter.notifyDataSetChanged(); }
+                adapter.notifyDataSetChanged();
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -59,8 +61,10 @@ public class ReadFragment extends AppCompatActivity {
 
         });
 
-        adapter = new ReadAdapter(arrayList, this);
+        adapter = new ReadAdapter(arrayList, getActivity());
         recyclerView.setAdapter(adapter);
+
+        return view;
     }
 
 }
