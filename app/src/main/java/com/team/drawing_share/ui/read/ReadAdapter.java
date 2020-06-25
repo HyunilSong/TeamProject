@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresPermission;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -52,6 +51,8 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+
+
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImage())
                 .into(holder.iv_image);

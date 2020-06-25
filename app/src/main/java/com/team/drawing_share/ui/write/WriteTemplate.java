@@ -18,12 +18,11 @@ public class WriteTemplate {
         Title = title;
         Writer = writer;
 
-
         long time = System.currentTimeMillis();
         SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
 
         Time = dayTime.format(new Date(time));
-        Image = "https://firebasestorage.googleapis.com/v0/b/drawingshare-8fc09.appspot.com/o/" + Time + "_" + Title + ".png";
+        Image = storageref + Time + "_" + Title + ".png";
     }
 
 }

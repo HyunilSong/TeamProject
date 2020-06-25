@@ -116,9 +116,7 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                         DatabaseReference idearef = ref.child("idea");
                         String title = title_et.getText().toString();
                         String username = firebaseAuth.getCurrentUser().getDisplayName();
-                        storageref = storage.getReference();
                         WriteTemplate idea = new WriteTemplate(title,username,storageref.toString());
-                        System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
                         idearef.push().setValue(idea);
 
                         //save imagefile(.png) to local file
@@ -148,6 +146,7 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                                 // ...
                             }
                         });
+
 
 
                     }
