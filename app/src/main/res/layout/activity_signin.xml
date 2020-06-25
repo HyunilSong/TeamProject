@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".SigninActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/signin_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:onClick="signIn"
         android:text="Sign In"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/f_password_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -27,7 +24,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -46,11 +43,11 @@
         android:id="@+id/linearLayout4"
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/signin_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -67,26 +64,29 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/signin_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:onClick="signIn"
-        android:text="Sign In"
-        app:layout_constraintBottom_toTopOf="@+id/f_password_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/f_password_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="188dp"
         android:onClick="OnClickHandler"
         android:text="Forget password?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Sign In"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.495" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
