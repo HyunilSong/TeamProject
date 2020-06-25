@@ -41,7 +41,8 @@ public class ReadFragment extends Fragment{
 
         database = FirebaseDatabase.getInstance();
 
-        databaseReference = database.getReference("Idea");
+        databaseReference = database.getReference("idea");
+        System.out.println(databaseReference);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
