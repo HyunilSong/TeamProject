@@ -35,7 +35,6 @@ import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 import com.team.drawing_share.DataActivity;
 import com.team.drawing_share.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
@@ -45,7 +44,6 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
     private DrawingView drawingView;
     private SeekBar penSizeSeekBar, eraserSizeSeekBar;
     private WriteViewModel writeViewModel;
-
     private FirebaseAuth firebaseAuth;
 
     private FirebaseDatabase database;
@@ -111,17 +109,21 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                 alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //realtime database writing process
                         DatabaseReference idearef = ref.child("idea");
                         String title = title_et.getText().toString();
                         String username = firebaseAuth.getCurrentUser().getDisplayName();
                         WriteTemplate idea = new WriteTemplate(title,username);
                         System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
                         idearef.push().setValue(idea);
-                        System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
-                        drawingView.saveImage(Environment.getExternalStorageDirectory().getPath().toString(), idea.Time + "_" + title,
+
+                        //save imagefile(.png) to local file
+                        System.out.println(getActivity().getExternalFilesDir(null));
+                        drawingView.saveImage(getActivity().getExternalFilesDir(null).getPath(), idea.Time + "_" + title,
                                 Bitmap.CompressFormat.PNG, 100);
 
-                        String imgpath = Environment.getExternalStorageDirectory().getPath()+"/"+idea.Time+"_"+title+".png";
+                        //get imagefile and upload to firebase storage
+                        String imgpath = getActivity().getExternalFilesDir(null).getPath()+"/"+idea.Time+"_"+title+".png";
                         Bitmap bm = BitmapFactory.decodeFile(imgpath);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
