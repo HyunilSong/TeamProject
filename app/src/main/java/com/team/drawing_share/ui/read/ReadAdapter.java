@@ -31,14 +31,14 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
         ImageView iv_image;
         TextView tv_title;
         TextView tv_writer;
-        TextView tv_date;
+        TextView tv_time;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.iv_image = itemView.findViewById(R.id.iv_image);
             this.tv_title = itemView.findViewById(R.id.tv_title);
             this.tv_writer = itemView.findViewById(R.id.tv_writer);
-            this.tv_date = itemView.findViewById(R.id.tv_date);
+            this.tv_time = itemView.findViewById(R.id.tv_time);
         }
     }
 
@@ -57,7 +57,7 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
                 .into(holder.iv_image);
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_writer.setText(arrayList.get(position).getWriter());
-        holder.tv_date.setText(arrayList.get(position).getTime());
+        holder.tv_time.setText(arrayList.get(position).getTime());
     }
 
     @Override
