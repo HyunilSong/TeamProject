@@ -1,42 +1,42 @@
 package com.team.drawing_share.ui.read;
 
 public class Idea {
-    private String image;
-    private String title;
-    private String writer;
-    private String date;
+    private String Image;
+    private String Title;
+    private String Writer;
+    private String Date;
 
     public Idea(){}
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.Image = image;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.Title = title;
     }
 
     public String getWriter() {
-        return writer;
+        return Writer;
     }
 
     public void setWriter(String writer) {
-        this.writer = writer;
+        this.Writer = writer;
     }
 
     public String getDate() {
-        return date;
+        return Date;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.Date = date;
     }
 }
