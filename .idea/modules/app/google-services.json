@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1082087385212",
+    "firebase_url": "https://drawingshare-daef8.firebaseio.com",
+    "project_id": "drawingshare-daef8",
+    "storage_bucket": "drawingshare-daef8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082087385212:android:acc33ec3231c449b5581f9",
+        "android_client_info": {
+          "package_name": "com.team.drawing_share"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082087385212-aohjk44klsf8rbgc01ibv85ljtvt7oib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.drawing_share",
+            "certificate_hash": "fd48e4b793a7fa28a8aa9d23cd035fea25d09a8d"
+          }
+        },
+        {
+          "client_id": "1082087385212-6maf7tcplktu2sqqmeuka1kpve2mjfuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQQyRMpyM3lfqtLETcOw7sIA5hcy2TPps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082087385212-6maf7tcplktu2sqqmeuka1kpve2mjfuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
