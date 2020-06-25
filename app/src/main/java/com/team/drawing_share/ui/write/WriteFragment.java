@@ -117,33 +117,34 @@ public class WriteFragment extends Fragment implements View.OnClickListener, See
                         WriteTemplate idea = new WriteTemplate(title,username);
                         System.out.println(title + " " + username + " " + idea.Time +" " + idearef);
                         idearef.push().setValue(idea);
+                        System.out.println(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
+                        drawingView.saveImage(Environment.getExternalStorageDirectory().getPath().toString(), idea.Time + "_" + title,
+                                Bitmap.CompressFormat.PNG, 100);
+//                        // problem
+//                        Bitmap whatTheUserDrewBitmap = drawingView.getDrawingCache();
+//                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                        whatTheUserDrewBitmap =
+//                                ThumbnailUtils.extractThumbnail(whatTheUserDrewBitmap, 256, 256);
+//                        // problem
+//                        //whatTheUserDrewBitmap 이 Bitmap의 객체가 되어야됨(그림이 그려진)
+//                        whatTheUserDrewBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                        byte[] data = baos.toByteArray();
+//
+//                        UploadTask uploadTask = storageref.putBytes(data);
+//                        uploadTask.addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                                // Handle unsuccessful uploads
+//                            }
+//                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+//                                // ...
+//                            }
+//                        });
 
-                        // problem
-                        Bitmap whatTheUserDrewBitmap = drawingView.getDrawingCache();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        whatTheUserDrewBitmap =
-                                ThumbnailUtils.extractThumbnail(whatTheUserDrewBitmap, 256, 256);
-                        // problem
-                        //whatTheUserDrewBitmap 이 Bitmap의 객체가 되어야됨(그림이 그려진)
-                        whatTheUserDrewBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] data = baos.toByteArray();
 
-                        UploadTask uploadTask = storageref.putBytes(data);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle unsuccessful uploads
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                                // ...
-                            }
-                        });
-
-//                        drawingView.saveImage(storageref.toString(), idea.Time + "_" + title,
-//                                Bitmap.CompressFormat.PNG, 100);
                     }
                 });
                 alert.setNegativeButton("Don`t save", new DialogInterface.OnClickListener() {

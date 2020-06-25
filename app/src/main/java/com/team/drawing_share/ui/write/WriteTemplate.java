@@ -12,7 +12,7 @@ public class WriteTemplate {
         Title = title;
         Writer = writer;
         long time = System.currentTimeMillis();
-        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd_hh:mm:ss");
         Time = dayTime.format(new Date(time));
     }
 
