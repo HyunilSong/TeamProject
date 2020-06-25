@@ -4,7 +4,7 @@ public class Idea {
     private String Image;
     private String Title;
     private String Writer;
-    private String Date;
+    private String Time;
 
     public Idea(){}
 
@@ -32,11 +32,11 @@ public class Idea {
         this.Writer = writer;
     }
 
-    public String getDate() {
-        return Date;
+    public String getTime() {
+        return Time;
     }
 
-    public void setDate(String date) {
-        this.Date = date;
+    public void setTime(String date) {
+        this.Time = date;
     }
 }

@@ -57,7 +57,7 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.CustomViewHold
                 .into(holder.iv_image);
         holder.tv_title.setText(arrayList.get(position).getTitle());
         holder.tv_writer.setText(arrayList.get(position).getWriter());
-        holder.tv_date.setText(arrayList.get(position).getDate());
+        holder.tv_date.setText(arrayList.get(position).getTime());
     }
 
     @Override
